@@ -29,7 +29,7 @@
                             <span class="text-muted">Lembrar-me</span>
                         </base-checkbox>
                         <div class="text-center">
-                            <base-button type="primary" class="my-4">Entrar</base-button>
+                            <base-button type="primary" class="my-4" @click="login">Entrar</base-button>
                         </div>
                     </form>
                 </div>
@@ -59,6 +59,11 @@ export default {
                 password: ""
             }
         };
+    },
+    methods: {
+        login() {
+            this.$router.push({ path: "dashboard" });
+        }
     }
 };
 </script>
