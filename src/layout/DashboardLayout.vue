@@ -9,10 +9,10 @@
                     :link="{name: 'Items', icon: 'ni ni-box-2 text-blue', path: '/items'}"
                 />
                 <sidebar-item
-                    :link="{name: 'Sagas', icon: 'ni ni-archive-2 text-blue', path: '/profile'}"
+                    :link="{name: 'Sagas', icon: 'ni ni-archive-2 text-blue', path: '/sagas'}"
                 />
                 <sidebar-item
-                    :link="{name: 'Amigos', icon: 'ni ni-single-02 text-blue', path: '/profile'}"
+                    :link="{name: 'Amigos', icon: 'ni ni-single-02 text-blue', path: '/amigos'}"
                 />
             </template>
         </side-bar>
