@@ -3,7 +3,7 @@
         <side-bar :background-color="sidebarBackground" short-title="Argon" title="Argon">
             <template slot="links">
                 <sidebar-item
-                    :link="{name: 'Inicio', icon: 'ni ni-tv-2 text-blue', path: '/icons'}"
+                    :link="{name: 'Inicio', icon: 'ni ni-tv-2 text-blue', path: '/dashboard'}"
                 />
                 <sidebar-item
                     :link="{name: 'Items', icon: 'ni ni-box-2 text-blue', path: '/items'}"
