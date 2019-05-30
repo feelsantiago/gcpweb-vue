@@ -68,26 +68,31 @@
                     </stats-card>
                 </div>
             </div>
-        </base-header>
 
-        <div class="container-fluid mt--7">
             <!--Tables-->
             <div class="row mt-5">
                 <div class="col-xl-12 mb-12 mb-xl-12">
                     <wish-list-table></wish-list-table>
                 </div>
             </div>
+            <div class="row mt-5">
+                <div class="col-xl-12 mb-12 mb-xl-12">
+                    <nao-devolvidos-table></nao-devolvidos-table>
+                </div>
+            </div>
             <!--End tables-->
-        </div>
+        </base-header>
     </div>
 </template>
 <script>
 // Tables
 import WishListTable from "./Dashboard/WishListTable";
+import NaoDevolvidosTable from "./Dashboard/NaoDevolvidosTable";
 
 export default {
     components: {
-        WishListTable
+        WishListTable,
+        NaoDevolvidosTable
     },
     data() {
         return {};
