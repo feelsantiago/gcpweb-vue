@@ -6,7 +6,7 @@
                     :link="{name: 'Inicio', icon: 'ni ni-tv-2 text-blue', path: '/icons'}"
                 />
                 <sidebar-item
-                    :link="{name: 'Items', icon: 'ni ni-box-2 text-blue', path: '/maps'}"
+                    :link="{name: 'Items', icon: 'ni ni-box-2 text-blue', path: '/items'}"
                 />
                 <sidebar-item
                     :link="{name: 'Sagas', icon: 'ni ni-archive-2 text-blue', path: '/profile'}"
