@@ -46,6 +46,11 @@ export default new Router({
 					path      : '/items',
 					name      : 'items',
 					component : () => import(/* webpackChunkName: "demo" */ './views/Items.vue')
+				},
+				{
+					path      : '/sagas',
+					name      : 'sagas',
+					component : () => import(/* webpackChunkName: "demo" */ './views/Sagas.vue')
 				}
 			]
 		}
