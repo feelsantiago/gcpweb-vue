@@ -33,7 +33,7 @@
                     <td>{{ row.quantidade }}</td>
                     <td>
                         <button class="btn btn-sm btn-primary">Editar</button>
-                        <button v-if="row.emprestado" class="btn btn-sm btn-primary">Emprestar</button>
+                        <button v-if="!row.emprestado" class="btn btn-sm btn-secondary">Emprestar</button>
                         <button v-else class="btn btn-sm btn-success">Devolver</button>
                     </td>
                 </template>
