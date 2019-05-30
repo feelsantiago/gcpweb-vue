@@ -6,7 +6,7 @@
                     <h3 class="mb-0">Sagas</h3>
                 </div>
                 <div class="col text-right">
-                    <button class="btn btn-sm btn-secondary">Adicionar</button>
+                    <base-button type="secondary" size="sm">Adicionar</base-button>
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@
                     <td>{{row.items}}</td>
                     <td>{{row.faltam}}</td>
                     <td>
-                        <button class="btn btn-sm btn-primary">Editar</button>
+                        <base-button type="primary" size="sm">Editar</base-button>
                     </td>
                 </template>
             </base-table>

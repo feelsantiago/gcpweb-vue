@@ -6,8 +6,8 @@
                     <h3 class="mb-0">Amigos</h3>
                 </div>
                 <div class="col text-right">
-                    <button class="btn btn-sm btn-primary">Pesquisar</button>
-                    <button class="btn btn-sm btn-secondary">Adicionar</button>
+                    <base-button type="primary" size="sm">Pesquisar</base-button>
+                    <base-button type="secondary" size="sm">Adicionar</base-button>
                 </div>
             </div>
         </div>
@@ -28,8 +28,8 @@
                     <td>{{row.telefone}}</td>
                     <td>{{ row.endereco }}</td>
                     <td>
-                        <button class="btn btn-sm btn-primary">Editar</button>
-                        <button class="btn btn-sm btn-danger">Excluir</button>
+                        <base-button type="primary" size="sm">Editar</base-button>
+                        <base-button type="danger" size="sm">Excluir</base-button>
                     </td>
                 </template>
             </base-table>

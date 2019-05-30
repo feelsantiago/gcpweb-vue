@@ -24,7 +24,7 @@
                     <td>{{row.devolucao}}</td>
                     <td>{{ row.amigo }}</td>
                     <td>
-                        <button class="btn btn-sm btn-success">Devolver</button>
+                        <base-button type="success" size="sm">Devolver</base-button>
                     </td>
                 </template>
             </base-table>

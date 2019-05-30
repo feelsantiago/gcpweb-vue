@@ -6,8 +6,8 @@
                     <h3 class="mb-0">Items</h3>
                 </div>
                 <div class="col text-right">
-                    <button class="btn btn-sm btn-primary">Pesquisar</button>
-                    <button class="btn btn-sm btn-secondary">Adicionar</button>
+                    <base-button type="primary" size="sm">Pesquisar</base-button>
+                    <base-button type="secondary" size="sm">Adicionar</base-button>
                 </div>
             </div>
         </div>
@@ -32,9 +32,9 @@
                     <td>{{ row.emprestado }}</td>
                     <td>{{ row.quantidade }}</td>
                     <td>
-                        <button class="btn btn-sm btn-primary">Editar</button>
-                        <button v-if="!row.emprestado" class="btn btn-sm btn-secondary">Emprestar</button>
-                        <button v-else class="btn btn-sm btn-success">Devolver</button>
+                        <base-button type="primary" size="sm">Editar</base-button>
+                        <base-button v-if="!row.emprestado" type="secondary" size="sm">Emprestar</base-button>
+                        <base-button v-else type="success" size="sm">Devolver</base-button>
                     </td>
                 </template>
             </base-table>
