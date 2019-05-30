@@ -29,7 +29,7 @@
                     <td>{{ row.endereco }}</td>
                     <td>
                         <button class="btn btn-sm btn-primary">Editar</button>
-                        <button class="btn btn-sm btn-danger">Deletar</button>
+                        <button class="btn btn-sm btn-danger">Excluir</button>
                     </td>
                 </template>
             </base-table>
