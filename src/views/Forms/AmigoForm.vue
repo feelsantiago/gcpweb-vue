@@ -79,7 +79,7 @@
 
 <script>
 export default {
-  name: "amigos-create",
+  name: "amigos-form",
   data() {
     return {
       amigo: {

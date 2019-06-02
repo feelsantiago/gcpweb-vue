@@ -59,8 +59,13 @@ export default new Router({
 				},
 				{
 					path      : '/amigos/create',
-					name      : 'amigos-create',
+					name      : 'amigos-form',
 					component : () => import(/* webpackChunkName: "demo" */ './views/Forms/AmigoForm.vue')
+				},
+				{
+					path      : '/sagas/create',
+					name      : 'sagas-form',
+					component : () => import(/* webpackChunkName: "demo" */ './views/Forms/SagaForm.vue')
 				}
 			]
 		}
