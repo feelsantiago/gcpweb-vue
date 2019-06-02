@@ -10,8 +10,6 @@
       </div>
       <div class="card-body">
         <form>
-          <input type="hidden" name="_csrf" value="0bb64f35-fb19-410d-a143-9b06f09136a2">
-
           <!-- id -->
           <input name="id" hidden>
 
