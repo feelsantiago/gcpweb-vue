@@ -48,8 +48,7 @@
             </select>
           </div>
           <div class="col-lg-8">
-            <label class="form-control-label" for="input-titulo">Titulo</label>
-            <base-input id="input-titulo" placeholder="Titulo"></base-input>
+            <base-input label="Titulo" placeholder="Titulo"></base-input>
           </div>
         </div>
         <div class="padding5"></div>
@@ -66,10 +65,10 @@
           </div>
           <div class="col-lg-4 end-checkbox-col div-checkbox">
             <div class="custom-control mb-3">
-              <base-checkbox class="checkbox-fix" id="input-emprestado">Emprestado</base-checkbox>
+              <base-checkbox class="checkbox-fix">Emprestado</base-checkbox>
             </div>
             <div class="custom-control mb-3">
-              <base-checkbox class="checkbox-fix" id="input-repetidos">Repetidos</base-checkbox>
+              <base-checkbox class="checkbox-fix">Repetidos</base-checkbox>
             </div>
           </div>
         </div>
@@ -77,12 +76,10 @@
         <hr class="my-4">
         <div class="row div-tipo" v-if="modals.pesquisar.model.tipo === 'hq'">
           <div class="col-lg-6">
-            <label class="form-control-label" for="base-input-editora">Editora</label>
-            <base-input id="input-editora" placeholder="Editora"></base-input>
+            <base-input label="Editora" placeholder="Editora"></base-input>
           </div>
           <div class="col-lg-6">
-            <label class="form-control-label" for="input-universo">Universo</label>
-            <base-input id="input-universo" placeholder="Universo"></base-input>
+            <base-input label="Universo" placeholder="Universo"></base-input>
           </div>
         </div>
         <div class="row div-tipo" v-if="modals.pesquisar.model.tipo === 'dvdcd'">
@@ -94,20 +91,17 @@
         </div>
         <div class="row div-tipo" v-if="modals.pesquisar.model.tipo === 'dlc'">
           <div class="col-lg-12">
-            <label class="form-control-label" for="input-localizacao">Localização</label>
-            <base-input id="input-localizacao" placeholder="Localização"></base-input>
+            <base-input label="Localizacao" placeholder="Localização"></base-input>
           </div>
         </div>
         <div class="row div-tipo" v-if="modals.pesquisar.model.tipo === 'jogodigital'">
           <div class="col-lg-12">
-            <label class="form-control-label" for="input-console">Console</label>
-            <base-input id="input-console" placeholder="Console"></base-input>
+            <base-input label="Console" placeholder="Console"></base-input>
           </div>
         </div>
         <div class="row div-tipo" v-if="modals.pesquisar.model.tipo === 'jogotabuleiro'">
           <div class="col-lg-12">
-            <label class="form-control-label" for="input-marca">Marca</label>
-            <base-input id="input-marca" placeholder="Marca"></base-input>
+            <base-input label="Marca" placeholder="Marca"></base-input>
           </div>
         </div>
       </div>
