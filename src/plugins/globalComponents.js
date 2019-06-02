@@ -8,6 +8,7 @@ import BaseNav from '../components/BaseNav';
 import BasePagination from '../components/BasePagination';
 import BaseProgress from '../components/BaseProgress';
 import BaseRadio from '../components/BaseRadio';
+import BaseSelectMultiple from '../components/BaseSelectMultiple';
 import BaseSlider from '../components/BaseSlider';
 import BaseSwitch from '../components/BaseSwitch';
 import BaseTable from '../components/BaseTable';
@@ -30,6 +31,7 @@ export default {
 		Vue.component(BasePagination.name, BasePagination);
 		Vue.component(BaseProgress.name, BaseProgress);
 		Vue.component(BaseRadio.name, BaseRadio);
+		Vue.component(BaseSelectMultiple.name, BaseSelectMultiple);
 		Vue.component(BaseSlider.name, BaseSlider);
 		Vue.component(BaseSwitch.name, BaseSwitch);
 		Vue.component(BaseTable.name, BaseTable);
