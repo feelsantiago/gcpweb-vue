@@ -1,17 +1,17 @@
 <template>
   <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8">
     <items-table
-      @adicionar-click="modals.adicionar = true"
-      @pesquisar-click="modals.pesquisar = true"
+      @adicionar-click="modals.adicionar.status = true"
+      @pesquisar-click="modals.pesquisar.status = true"
     ></items-table>
 
     <!-- Adicionar Modal -->
-    <modal :show.sync="modals.adicionar">
+    <modal :show.sync="modals.adicionar.status">
       <template slot="header">
         <h5 class="modal-title" id="exampleModalLabel">Adicionar Item</h5>
       </template>
       <div>
-        <select class="form-control" v-model="endpoint">
+        <select class="form-control" v-model="modals.adicionar.endpoint">
           <option value="hq">HQ</option>
           <option value="dvdcd">DVD/CD</option>
           <option value="jogodigital">Jogo Digital</option>
@@ -20,13 +20,13 @@
         </select>
       </div>
       <template slot="footer">
-        <base-button type="secondary" @click="modals.adicionar = false">Fechar</base-button>
+        <base-button type="secondary" @click="modals.adicionar.status = false">Fechar</base-button>
         <base-button @click="adicionar" type="primary">Continuar</base-button>
       </template>
     </modal>
 
     <!-- Pesquisar Modal -->
-    <modal :show.sync="modals.pesquisar">
+    <modal :show.sync="modals.pesquisar.status">
       <template slot="header">
         <h5 class="modal-title" id="exampleModalLabel">Pesquisar Item</h5>
       </template>
@@ -35,7 +35,7 @@
           <div class="col-lg-4">
             <label class="form-control-label" for="input-tipo">Tipo</label>
             <select
-              v-model="pesquisar.tipo"
+              v-model="modals.pesquisar.model.tipo"
               name="tipo"
               id="input-tipo"
               class="form-control form-control-alternative"
@@ -75,7 +75,7 @@
         </div>
         <div class="padding5"></div>
         <hr class="my-4">
-        <div class="row div-tipo" v-if="pesquisar.tipo === 'hq'">
+        <div class="row div-tipo" v-if="modals.pesquisar.model.tipo === 'hq'">
           <div class="col-lg-6">
             <label class="form-control-label" for="base-input-editora">Editora</label>
             <base-input id="input-editora" placeholder="Editora"></base-input>
@@ -85,26 +85,26 @@
             <base-input id="input-universo" placeholder="Universo"></base-input>
           </div>
         </div>
-        <div class="row div-tipo" v-if="pesquisar.tipo === 'dvdcd'">
+        <div class="row div-tipo" v-if="modals.pesquisar.model.tipo === 'dvdcd'">
           <div class="col-lg-12 end-checkbox-col">
             <div class="custom-control custom-checkbox mb-3">
               <base-checkbox>Assistidos</base-checkbox>
             </div>
           </div>
         </div>
-        <div class="row div-tipo" v-if="pesquisar.tipo === 'dlc'">
+        <div class="row div-tipo" v-if="modals.pesquisar.model.tipo === 'dlc'">
           <div class="col-lg-12">
             <label class="form-control-label" for="input-localizacao">Localização</label>
             <base-input id="input-localizacao" placeholder="Localização"></base-input>
           </div>
         </div>
-        <div class="row div-tipo" v-if="pesquisar.tipo === 'jogodigital'">
+        <div class="row div-tipo" v-if="modals.pesquisar.model.tipo === 'jogodigital'">
           <div class="col-lg-12">
             <label class="form-control-label" for="input-console">Console</label>
             <base-input id="input-console" placeholder="Console"></base-input>
           </div>
         </div>
-        <div class="row div-tipo" v-if="pesquisar.tipo === 'jogotabuleiro'">
+        <div class="row div-tipo" v-if="modals.pesquisar.model.tipo === 'jogotabuleiro'">
           <div class="col-lg-12">
             <label class="form-control-label" for="input-marca">Marca</label>
             <base-input id="input-marca" placeholder="Marca"></base-input>
@@ -112,7 +112,7 @@
         </div>
       </div>
       <template slot="footer">
-        <base-button type="secondary" @click="modals.pesquisar = false">Fechar</base-button>
+        <base-button type="secondary" @click="modals.pesquisar.status = false">Fechar</base-button>
         <base-button @click="pesquisar" type="primary">Pesquisar</base-button>
       </template>
     </modal>
@@ -131,18 +131,21 @@ export default {
     return {
       endpoint: "hq",
       modals: {
-        adicionar: false,
-        pesquisar: false
-      },
-      pesquisar: {
-        tipo: "hq"
+        adicionar: {
+          status: false,
+          endpoint: "hq"
+        },
+        pesquisar: {
+          status: false,
+          model: {
+            tipo: "hq"
+          }
+        }
       }
     };
   },
   methods: {
-    adicionar() {
-      console.log(this.endpoint);
-    },
+    adicionar() {},
     pesquisar() {}
   }
 };
