@@ -9,35 +9,57 @@
                 </div>
             </div>
             <div class="card-body">
-                <item-form>
+                <item-form :validSlot="valid" @onFormValidation="handleOnFormValidation">
                     <h6 class="heading-small text-muted mb-4">Informações da Hq</h6>
                     <div class="pl-lg-4">
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    <base-input label="Numero" placeholder="Numero" type="number"></base-input>
+                                    <base-input
+                                        label="Numero"
+                                        placeholder="Numero"
+                                        type="number"
+                                        v-model="hq.numero"
+                                    ></base-input>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    <base-input label="Editora" placeholder="Editora"></base-input>
+                                    <base-input
+                                        label="Editora"
+                                        placeholder="Editora"
+                                        :required="true"
+                                        error="Este campo é obrigatorio"
+                                        :valid="validEditora"
+                                        v-model="hq.editora"
+                                    ></base-input>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    <base-input label="Universo" placeholder="Universo"></base-input>
+                                    <base-input
+                                        label="Universo"
+                                        placeholder="Universo"
+                                        v-model="hq.universo"
+                                    ></base-input>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <base-input label="Saga" placeholder="Saga"></base-input>
+                                    <base-input label="Saga" placeholder="Saga" v-model="hq.saga"></base-input>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </item-form>
+                <hr class="my-4">
+                <div class="row align-right">
+                    <div class="col-md-12">
+                        <base-button type="success" :disable="disabledSubmit">Salvar</base-button>
+                    </div>
+                </div>
             </div>
         </div>
     </base-header>
@@ -48,6 +70,34 @@ import ItemForm from "./ItemForm";
 
 export default {
     name: "hq-form",
-    components: { ItemForm }
+    components: { ItemForm },
+    data() {
+        return {
+            disabledSubmit: true,
+            valid: {
+                editora: false
+            },
+            hq: {
+                numero: 0,
+                editora: "",
+                universo: "",
+                saga: ""
+            }
+        };
+    },
+    methods: {
+        handleOnFormValidation(value) {
+            if (this.valid.editora && value) this.disabledSubmit = false;
+            else this.disabledSubmit = true;
+        }
+    },
+    computed: {
+        validEditora() {
+            this.valid.editora =
+                this.hq.editora !== "" && this.hq.editora !== " ";
+
+            return this.valid.editora;
+        }
+    }
 };
 </script>

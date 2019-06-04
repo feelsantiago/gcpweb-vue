@@ -16,7 +16,7 @@
                             :required="true"
                             error="Este campo é obrigatorio"
                             v-model="item.titulo"
-                            :valid="validTitulo()"
+                            :valid="validTitulo"
                         ></base-input>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                             error="Este campo é obrigatorio"
                             placeholder="0"
                             v-model="item.quantidade"
-                            :valid="validQuantidade()"
+                            :valid="validQuantidade"
                         ></base-input>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                             error="Este campo é obrigatorio"
                             placeholder="1-5"
                             v-model="item.importancia"
-                            :valid="validImportancia()"
+                            :valid="validImportancia"
                         ></base-input>
                     </div>
                 </div>
@@ -123,12 +123,6 @@
         </div>
         <hr class="my-4">
         <slot></slot>
-        <hr class="my-4">
-        <div class="row align-right">
-            <div class="col-md-12">
-                <base-button type="success" :disable="disabledSubmit">Salvar</base-button>
-            </div>
-        </div>
     </form>
 </template>
 
@@ -139,9 +133,15 @@ import "flatpickr/dist/flatpickr.css";
 export default {
     name: "item-form",
     components: { flatPicker },
+    props: {
+        validSlot: {
+            type: Object,
+            description: "Object with boolean values to validate slot inputs",
+            default: {}
+        }
+    },
     data() {
         return {
-            disabledSubmit: true,
             valid: {
                 titulo: false,
                 quantidade: false,
@@ -162,6 +162,17 @@ export default {
         };
     },
     methods: {
+        validateSubmit() {
+            if (
+                this.valid.titulo &&
+                this.valid.quantidade &&
+                this.valid.importancia
+            ) {
+                this.$emit("onFormValidation", true);
+            } else this.$emit("onFormValidation", false);
+        }
+    },
+    computed: {
         validTitulo() {
             this.valid.titulo =
                 this.item.titulo !== "" && this.item.titulo !== " ";
@@ -180,15 +191,6 @@ export default {
 
             this.validateSubmit();
             return this.valid.importancia;
-        },
-        validateSubmit() {
-            if (
-                this.valid.titulo &&
-                this.valid.quantidade &&
-                this.valid.importancia
-            )
-                this.disabledSubmit = false;
-            else this.disabledSubmit = true;
         }
     }
 };
