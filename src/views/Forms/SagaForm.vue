@@ -24,7 +24,7 @@
                                         placeholder="Titulo"
                                         :required="true"
                                         error="Este campo é obrigatorio"
-                                        :valid="validTitulo()"
+                                        :valid="validTitulo"
                                         v-model="saga.titulo"
                                     ></base-input>
                                 </div>
@@ -103,13 +103,6 @@ export default {
         onSelectionChangeHanlder(result) {
             console.log(result);
         },
-        validTitulo() {
-            this.valid.titulo =
-                this.saga.titulo !== "" && this.saga.titulo !== " ";
-            // verify submit button
-            this.submitValidation();
-            return this.valid.titulo;
-        },
         submitValidation() {
             if (this.valid.titulo) this.disabledSubmit = false;
             else this.disabledSubmit = true;
@@ -118,6 +111,13 @@ export default {
     computed: {
         titulo() {
             return this.saga.id === 0 ? "Adicionar" : "Editar";
+        },
+        validTitulo() {
+            this.valid.titulo =
+                this.saga.titulo !== "" && this.saga.titulo !== " ";
+            // verify submit button
+            this.submitValidation();
+            return this.valid.titulo;
         }
     }
 };
