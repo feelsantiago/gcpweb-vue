@@ -42,14 +42,14 @@
                         <base-input type="number" label="Importancia" placeholder="1-5"></base-input>
                     </div>
                 </div>
-                <div class="col-lg-2 center-checkbox-col">
+                <div class="col-lg-2 center-checkbox">
                     <div class="custom-control custom-checkbox mb-3">
                         <base-checkbox>Wishlist</base-checkbox>
                     </div>
                 </div>
-                <div class="col-lg-2 center-checkbox-col">
+                <div class="col-lg-2 center-checkbox">
                     <div class="custom-control custom-checkbox mb-3">
-                        <base-input>Emprestado</base-input>
+                        <base-checkbox>Emprestado</base-checkbox>
                     </div>
                 </div>
             </div>
@@ -61,6 +61,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
+                        <label class="form-control-label">Disponibilidade</label>
                         <base-input
                             addon-left-icon="ni ni-calendar-grid-58"
                             placeholder="Selecione uma data"
@@ -71,6 +72,7 @@
                                 @on-close="blur"
                                 :config="{allowInput: true}"
                                 class="form-control datepicker"
+                                v-model="date"
                             ></flat-picker>
                         </base-input>
                     </div>
@@ -93,6 +95,11 @@ import "flatpickr/dist/flatpickr.css";
 
 export default {
     name: "item-form",
-    components: [flatPicker]
+    components: { flatPicker },
+    data() {
+        return {
+            date: ""
+        };
+    }
 };
 </script>
