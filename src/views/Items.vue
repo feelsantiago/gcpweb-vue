@@ -119,6 +119,7 @@
 
 <script>
 import ItemsTable from "./Tables/ItemsTable";
+import { nextTick } from "q";
 
 export default {
     name: "items",
@@ -143,8 +144,11 @@ export default {
     },
     methods: {
         adicionar() {
-            this.$router.push({
-                path: `items/${this.modals.adicionar.endpoint}/create`
+            this.modals.adicionar.status = false;
+            nextTick(() => {
+                this.$router.push({
+                    path: `items/${this.modals.adicionar.endpoint}/create`
+                });
             });
         },
         pesquisar() {}

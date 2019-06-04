@@ -9,7 +9,35 @@
                 </div>
             </div>
             <div class="card-body">
-                <item-form></item-form>
+                <item-form>
+                    <h6 class="heading-small text-muted mb-4">Informações da Hq</h6>
+                    <div class="pl-lg-4">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <base-input label="Numero" placeholder="Numero" type="number"></base-input>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <base-input label="Editora" placeholder="Editora"></base-input>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <base-input label="Universo" placeholder="Universo"></base-input>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <base-input label="Saga" placeholder="Saga"></base-input>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </item-form>
             </div>
         </div>
     </base-header>
