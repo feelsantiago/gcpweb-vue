@@ -66,6 +66,11 @@ export default new Router({
 					path      : '/sagas/create',
 					name      : 'sagas-form',
 					component : () => import(/* webpackChunkName: "demo" */ './views/Forms/SagaForm.vue')
+				},
+				{
+					path      : '/items/hq/create',
+					name      : 'hq-form',
+					component : () => import(/* webpackChunkName: "demo" */ './views/Forms/HqForm.vue')
 				}
 			]
 		}
