@@ -14,29 +14,24 @@
                     @onFormValidation="handleOnFormValidation"
                     @onValueChange="handleValueChange"
                 >
-                    <h6 class="heading-small text-muted mb-4">Informações do Dvd/Cd</h6>
+                    <h6 class="heading-small text-muted mb-4">Informações do Jogo Digital</h6>
                     <div class="pl-lg-4">
                         <div class="row">
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <base-input label="Marca" placeholder="Marca"></base-input>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <base-input
-                                        label="Conteudo"
-                                        placeholder="Conteudo"
-                                        v-model="dvdcd.conteudo"
+                                        label="Console"
+                                        placeholder="Console"
+                                        v-model="jogodigital.console"
                                         :required="true"
                                         error="Este campo é obrigatorio"
-                                        :valid="validConteudo"
+                                        :valid="validConsole"
                                     ></base-input>
                                 </div>
                             </div>
                             <div class="col-lg-4 center-checkbox">
                                 <div class="custom-control custom-checkbox mb-3">
-                                    <base-checkbox v-model="dvdcd.assistido">Assistido</base-checkbox>
+                                    <base-checkbox v-model="jogodigital.finalizado">Finalizado</base-checkbox>
                                 </div>
                             </div>
                         </div>
@@ -57,25 +52,24 @@
 import ItemForm from "./ItemForm";
 
 export default {
-    name: "dvdcd-form",
+    name: "jogodigital-form",
     components: { ItemForm },
     data() {
         return {
             disabledSubmit: true,
             valid: {
-                conteudo: false
+                console: false
             },
-            dvdcd: {
-                marca: "",
-                conteudo: "",
-                assistido: false
+            jogodigital: {
+                console: "",
+                finalizado: false
             },
             item: {}
         };
     },
     methods: {
         handleOnFormValidation(value) {
-            if (this.valid.conteudo && value) this.disabledSubmit = false;
+            if (this.valid.console && value) this.disabledSubmit = false;
             else this.disabledSubmit = true;
         },
         handleValueChange(value) {
@@ -84,11 +78,12 @@ export default {
         }
     },
     computed: {
-        validConteudo() {
-            this.valid.conteudo =
-                this.dvdcd.conteudo !== "" && this.dvdcd.conteudo !== " ";
+        validConsole() {
+            this.valid.console =
+                this.jogodigital.console !== "" &&
+                this.jogodigital.console !== " ";
 
-            return this.valid.conteudo;
+            return this.valid.console;
         }
     }
 };

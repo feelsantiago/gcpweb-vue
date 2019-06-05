@@ -86,6 +86,11 @@ export default new Router({
 					path      : '/items/jogotabuleiro/create',
 					name      : 'Criar DVD/CD',
 					component : () => import(/* webpackChunkName: "demo" */ './views/Forms/JogoTabuleiroForm.vue')
+				},
+				{
+					path      : '/items/jogodigital/create',
+					name      : 'Criar JOGO DIGITAL',
+					component : () => import(/* webpackChunkName: "demo" */ './views/Forms/JogoDigital.vue')
 				}
 			]
 		}
