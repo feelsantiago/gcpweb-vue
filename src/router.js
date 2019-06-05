@@ -31,7 +31,7 @@ export default new Router({
 			children  : [
 				{
 					path      : '/dashboard',
-					name      : 'dashboard',
+					name      : 'Inicio',
 					// route level code-splitting
 					// this generates a separate chunk (about.[hash].js) for this route
 					// which is lazy-loaded when the route is visited.
@@ -44,33 +44,38 @@ export default new Router({
 				},
 				{
 					path      : '/items',
-					name      : 'items',
+					name      : 'Items',
 					component : () => import(/* webpackChunkName: "demo" */ './views/Items.vue')
 				},
 				{
 					path      : '/sagas',
-					name      : 'sagas',
+					name      : 'Sagas',
 					component : () => import(/* webpackChunkName: "demo" */ './views/Sagas.vue')
 				},
 				{
 					path      : '/amigos',
-					name      : 'amigos',
+					name      : 'Amigos',
 					component : () => import(/* webpackChunkName: "demo" */ './views/Amigos.vue')
 				},
 				{
 					path      : '/amigos/create',
-					name      : 'amigos-form',
+					name      : 'Criar Amigos',
 					component : () => import(/* webpackChunkName: "demo" */ './views/Forms/AmigoForm.vue')
 				},
 				{
 					path      : '/sagas/create',
-					name      : 'sagas-form',
+					name      : 'Criar Sagas',
 					component : () => import(/* webpackChunkName: "demo" */ './views/Forms/SagaForm.vue')
 				},
 				{
 					path      : '/items/hq/create',
-					name      : 'hq-form',
+					name      : 'Criar HQ',
 					component : () => import(/* webpackChunkName: "demo" */ './views/Forms/HqForm.vue')
+				},
+				{
+					path      : '/items/dlc/create',
+					name      : 'Criar DLC',
+					component : () => import(/* webpackChunkName: "demo" */ './views/Forms/DlcForm.vue')
 				}
 			]
 		}
