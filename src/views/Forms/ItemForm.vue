@@ -17,6 +17,7 @@
                             error="Este campo é obrigatorio"
                             v-model="item.titulo"
                             :valid="validTitulo"
+                            @change="handleInputChange($event)"
                         ></base-input>
                     </div>
                 </div>
@@ -27,6 +28,7 @@
                             id="input-estado"
                             class="form-control form-control-alternative"
                             v-model="item.estado"
+                            @change="handleInputChange($event)"
                         >
                             <option>Novo</option>
                             <option>Restaurado</option>
@@ -45,6 +47,7 @@
                             label="Preço"
                             placeholder="$"
                             v-model="item.preco"
+                            @change="handleInputChange($event)"
                         ></base-input>
                     </div>
                 </div>
@@ -58,6 +61,7 @@
                             placeholder="0"
                             v-model="item.quantidade"
                             :valid="validQuantidade"
+                            @change="handleInputChange($event)"
                         ></base-input>
                     </div>
                 </div>
@@ -71,12 +75,16 @@
                             placeholder="1-5"
                             v-model="item.importancia"
                             :valid="validImportancia"
+                            @change="handleInputChange($event)"
                         ></base-input>
                     </div>
                 </div>
                 <div class="col-lg-2 center-checkbox">
                     <div class="custom-control custom-checkbox mb-3">
-                        <base-checkbox v-model="item.wishlist">Wishlist</base-checkbox>
+                        <base-checkbox
+                            v-model="item.wishlist"
+                            @input="handleInputChange($event)"
+                        >Wishlist</base-checkbox>
                     </div>
                 </div>
                 <!-- <div class="col-lg-2 center-checkbox">
@@ -88,7 +96,12 @@
             <div v-if="item.wishlist" class="row">
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <base-input label="url" placeholder="url" v-model="item.url"></base-input>
+                        <base-input
+                            label="url"
+                            placeholder="url"
+                            v-model="item.url"
+                            @change="handleInputChange($event)"
+                        ></base-input>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -97,6 +110,7 @@
                         <base-input
                             addon-left-icon="ni ni-calendar-grid-58"
                             placeholder="Selecione uma data"
+                            @change="handleInputChange($event)"
                         >
                             <flat-picker
                                 slot-scope="{focus, blur}"
@@ -105,6 +119,7 @@
                                 :config="{allowInput: true}"
                                 class="form-control datepicker"
                                 v-model="item.disponibilidade"
+                                @input="handleInputChange($event)"
                             ></flat-picker>
                         </base-input>
                     </div>
@@ -117,6 +132,7 @@
                         rows="4"
                         class="form-control form-control-alternative"
                         v-model="item.observacoes"
+                        @change="handleInputChange($event)"
                     ></textarea>
                 </div>
             </div>
@@ -170,6 +186,9 @@ export default {
             ) {
                 this.$emit("onFormValidation", true);
             } else this.$emit("onFormValidation", false);
+        },
+        handleInputChange(value) {
+            this.$emit("onValueChange", this.item);
         }
     },
     computed: {

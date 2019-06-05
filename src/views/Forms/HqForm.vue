@@ -9,7 +9,11 @@
                 </div>
             </div>
             <div class="card-body">
-                <item-form :validSlot="valid" @onFormValidation="handleOnFormValidation">
+                <item-form
+                    :validSlot="valid"
+                    @onFormValidation="handleOnFormValidation"
+                    @onValueChange="handleValueChange"
+                >
                     <h6 class="heading-small text-muted mb-4">Informações da Hq</h6>
                     <div class="pl-lg-4">
                         <div class="row">
@@ -82,13 +86,18 @@ export default {
                 editora: "",
                 universo: "",
                 saga: ""
-            }
+            },
+            item: {}
         };
     },
     methods: {
         handleOnFormValidation(value) {
             if (this.valid.editora && value) this.disabledSubmit = false;
             else this.disabledSubmit = true;
+        },
+        handleValueChange(value) {
+            this.item = value;
+            console.log(this.item);
         }
     },
     computed: {
