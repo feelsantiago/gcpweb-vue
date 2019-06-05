@@ -76,6 +76,11 @@ export default new Router({
 					path      : '/items/dlc/create',
 					name      : 'Criar DLC',
 					component : () => import(/* webpackChunkName: "demo" */ './views/Forms/DlcForm.vue')
+				},
+				{
+					path      : '/items/dvdcd/create',
+					name      : 'Criar DVD/CD',
+					component : () => import(/* webpackChunkName: "demo" */ './views/Forms/DvdCdForm.vue')
 				}
 			]
 		}
