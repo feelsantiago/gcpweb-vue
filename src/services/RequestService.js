@@ -21,7 +21,7 @@ function transformArrayToEndpoint (params) {
 	let result;
 
 	for (let param of params) {
-		result += '/' + params;
+		if (param !== '' && param !== ' ') result += '/' + param;
 	}
 
 	return result;
@@ -53,6 +53,10 @@ class RequestService {
 
 	put (endpoint, body, params) {
 		return axios.put(getFullUrl(endpoint, params), body);
+	}
+
+	delete (endpoint, params) {
+		return axios.delete(getFullUrl(endpoint, params));
 	}
 }
 
