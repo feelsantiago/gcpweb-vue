@@ -1,6 +1,6 @@
 <template>
   <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8">
-    <sagas-table @adicionar-click="$router.push({ path: 'sagas/create' })"></sagas-table>
+    <sagas-table :data="sagas" @adicionar-click="$router.push({ path: 'sagas/create' })"></sagas-table>
   </base-header>
 </template>
 

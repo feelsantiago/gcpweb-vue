@@ -22,7 +22,7 @@
 
         <template slot-scope="{row}">
           <th scope="row">{{row.titulo}}</th>
-          <td>{{row.items}}</td>
+          <td>{{row.items.length}}</td>
           <td>{{row.faltam}}</td>
           <td>
             <base-button type="primary" size="sm">Editar</base-button>

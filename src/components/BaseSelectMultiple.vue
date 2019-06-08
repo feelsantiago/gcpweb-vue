@@ -6,8 +6,12 @@
     </template>
 
     <template slot-scope="{row, index}">
-      <th scope="row">
-        <base-checkbox v-model="binds[index].status" v-on:input="handleSelection(row, $event)"></base-checkbox>
+      <th>
+        <base-checkbox
+          v-if="binds.length > 0"
+          v-model="binds[index].status"
+          v-on:input="handleSelection(row, $event)"
+        ></base-checkbox>
       </th>
       <td v-for="(column, index) in columns" :key="index">{{ itemValue(row, column) }}</td>
     </template>
@@ -59,7 +63,7 @@ export default {
       this.$emit("onSelectionChange", this.result);
     }
   },
-  created() {
+  updated() {
     for (let element of this.data) {
       let finded = false;
       for (let a of this.selecteds) {
