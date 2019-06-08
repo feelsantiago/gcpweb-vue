@@ -15,7 +15,7 @@ function getFullUrl (endpoint, params, query) {
 	if (query) {
 		fullUrl += serializeQueryParam(query);
 	}
-	console.log(fullUrl);
+
 	return fullUrl;
 }
 
