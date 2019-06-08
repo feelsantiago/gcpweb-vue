@@ -153,7 +153,7 @@ export default {
         validSlot: {
             type: Object,
             description: "Object with boolean values to validate slot inputs",
-            default: {}
+            default: () => {}
         }
     },
     data() {
