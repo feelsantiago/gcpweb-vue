@@ -49,14 +49,19 @@
             </select>
           </div>
           <div class="col-lg-8">
-            <base-input label="Titulo" placeholder="Titulo"></base-input>
+            <base-input label="Titulo" placeholder="Titulo" v-model="modals.pesquisar.model.titulo"></base-input>
           </div>
         </div>
         <div class="padding5"></div>
         <div class="row">
           <div class="col-lg-8">
             <label class="form-control-label" for="input-estado">Estado</label>
-            <select name="estado" id="input-estado" class="form-control form-control-alternative">
+            <select
+              name="estado"
+              id="input-estado"
+              class="form-control form-control-alternative"
+              v-model="modals.pesquisar.model.estado"
+            >
               <option>Novo</option>
               <option>Restaurado</option>
               <option>Regular</option>
@@ -66,10 +71,16 @@
           </div>
           <div class="col-lg-4 end-checkbox-col div-checkbox">
             <div class="custom-control mb-3">
-              <base-checkbox class="checkbox-fix">Emprestado</base-checkbox>
+              <base-checkbox
+                class="checkbox-fix"
+                v-model="modals.pesquisar.model.emprestado"
+              >Emprestado</base-checkbox>
             </div>
             <div class="custom-control mb-3">
-              <base-checkbox class="checkbox-fix">Repetidos</base-checkbox>
+              <base-checkbox
+                class="checkbox-fix"
+                v-model="modals.pesquisar.model.repetidos"
+              >Repetidos</base-checkbox>
             </div>
           </div>
         </div>
@@ -77,32 +88,48 @@
         <hr class="my-4">
         <div class="row div-tipo" v-if="modals.pesquisar.model.tipo === 'hq'">
           <div class="col-lg-6">
-            <base-input label="Editora" placeholder="Editora"></base-input>
+            <base-input
+              label="Editora"
+              placeholder="Editora"
+              v-model="modals.pesquisar.model.editora"
+            ></base-input>
           </div>
           <div class="col-lg-6">
-            <base-input label="Universo" placeholder="Universo"></base-input>
+            <base-input
+              label="Universo"
+              placeholder="Universo"
+              v-model="modals.pesquisar.model.universo"
+            ></base-input>
           </div>
         </div>
         <div class="row div-tipo" v-if="modals.pesquisar.model.tipo === 'dvdcd'">
           <div class="col-lg-12 end-checkbox-col">
             <div class="custom-control custom-checkbox mb-3">
-              <base-checkbox>Assistidos</base-checkbox>
+              <base-checkbox v-model="modals.pesquisar.model.assistido">Assistidos</base-checkbox>
             </div>
           </div>
         </div>
         <div class="row div-tipo" v-if="modals.pesquisar.model.tipo === 'dlc'">
           <div class="col-lg-12">
-            <base-input label="Localizacao" placeholder="Localização"></base-input>
+            <base-input
+              label="Localizacao"
+              placeholder="Localização"
+              v-model="modals.pesquisar.model.localizacao"
+            ></base-input>
           </div>
         </div>
         <div class="row div-tipo" v-if="modals.pesquisar.model.tipo === 'jogodigital'">
           <div class="col-lg-12">
-            <base-input label="Console" placeholder="Console"></base-input>
+            <base-input
+              label="Console"
+              placeholder="Console"
+              v-model="modals.pesquisar.model.console"
+            ></base-input>
           </div>
         </div>
         <div class="row div-tipo" v-if="modals.pesquisar.model.tipo === 'jogotabuleiro'">
           <div class="col-lg-12">
-            <base-input label="Marca" placeholder="Marca"></base-input>
+            <base-input label="Marca" placeholder="Marca" v-model="modals.pesquisar.model.marca"></base-input>
           </div>
         </div>
       </div>
@@ -138,7 +165,17 @@ export default {
         pesquisar: {
           status: false,
           model: {
-            tipo: "hq"
+            tipo: "hq",
+            titulo: "",
+            estado: "",
+            emprestado: false,
+            repetidos: false,
+            editora: "",
+            universo: "",
+            assistido: false,
+            console: "",
+            localizacao: "",
+            marca: ""
           }
         }
       },
@@ -154,11 +191,14 @@ export default {
         });
       });
     },
-    pesquisar() {},
-    async refreshTabel() {
+    async pesquisar() {
+      await this.refreshTabel(this.modals.pesquisar.model);
+      this.modals.pesquisar.status = false;
+    },
+    async refreshTabel(query) {
       try {
         LoaderService.loading();
-        const result = await ItemService.getAll();
+        const result = await ItemService.getAll(query);
         this.items = result.data.content;
       } catch (error) {
         console.log(error);

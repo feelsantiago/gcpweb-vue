@@ -1,5 +1,6 @@
 import axios from 'axios';
 import AuthService from './AuthService';
+import { isBoolean } from 'util';
 
 const baseUrl = 'https://gcpweb-application.herokuapp.com/api/';
 
@@ -14,7 +15,7 @@ function getFullUrl (endpoint, params, query) {
 	if (query) {
 		fullUrl += serializeQueryParam(query);
 	}
-
+	console.log(fullUrl);
 	return fullUrl;
 }
 
@@ -33,7 +34,7 @@ function serializeQueryParam (query) {
 	let result = '?';
 
 	for (let key of keys) {
-		result += key + '=' + query[key] + '&';
+		if (query[key] !== '' && query[key] !== ' ') result += key + '=' + query[key] + '&';
 	}
 
 	if (result.endsWith('&')) return result.substr(0, result.length - 1);
