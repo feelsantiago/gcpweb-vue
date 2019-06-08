@@ -5,8 +5,8 @@ const endpoint = 'v1/item';
 class ItemService {
 	constructor () {}
 
-	getAll () {
-		return RequestService.get(endpoint);
+	getAll (query) {
+		return RequestService.get(endpoint, undefined, query);
 	}
 
 	getWishList () {

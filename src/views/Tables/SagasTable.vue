@@ -12,7 +12,7 @@
     </div>
 
     <div class="table-responsive">
-      <base-table thead-classes="thead-light" :data="tableData">
+      <base-table thead-classes="thead-light" :data="data">
         <template slot="columns">
           <th>Titulo</th>
           <th>Items</th>

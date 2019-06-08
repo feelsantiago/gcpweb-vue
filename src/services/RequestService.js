@@ -12,7 +12,7 @@ function getFullUrl (endpoint, params, query) {
 	}
 
 	if (query) {
-		fullUrl += serializeQueryParam(params);
+		fullUrl += serializeQueryParam(query);
 	}
 
 	return fullUrl;
@@ -36,7 +36,7 @@ function serializeQueryParam (query) {
 		result += key + '=' + query[key] + '&';
 	}
 
-	if (result.endsWith('&')) return result.substr(0, result.length - 2);
+	if (result.endsWith('&')) return result.substr(0, result.length - 1);
 
 	return result;
 }
