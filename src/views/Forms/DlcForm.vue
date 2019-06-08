@@ -79,7 +79,6 @@ export default {
       LoaderService.loading();
       const result = await ItemService.getAll({ tipo: "jogodigital" });
       this.jogos = result.data.content;
-      console.log(this.jogos);
     } catch (error) {
       console.log(error);
     } finally {
@@ -108,14 +107,13 @@ export default {
     },
     handleValueChange(value) {
       this.item = value;
-      console.log(this.item);
     },
     async submitForm() {
       try {
         LoaderService.loading();
         const payload = Object.assign({}, this.item, this.dlc);
         await DlcService.save(payload);
-        this.$router.psuh({ path: "/item" });
+        this.$router.push({ path: "/item" });
       } catch (error) {
         console.log(error);
       } finally {
