@@ -13,7 +13,7 @@
     </div>
 
     <div class="table-responsive">
-      <base-table thead-classes="thead-light" :data="tableData">
+      <base-table thead-classes="thead-light" :data="data">
         <template slot="columns">
           <th>Titulo</th>
           <th>Tipo</th>
@@ -44,28 +44,15 @@
 <script>
 export default {
   name: "items-table",
+  props: {
+    data: {
+      type: Array,
+      default: () => [],
+      description: "Table data"
+    }
+  },
   data() {
-    return {
-      total: 0,
-      tableData: [
-        {
-          titulo: "HQ 1",
-          tipo: "HQ",
-          disponibilidade: "25/02/2020",
-          preco: "500",
-          emprestado: false,
-          quantidade: 2
-        },
-        {
-          titulo: "HQ 2",
-          tipo: "HQ",
-          disponibilidade: "25/02/2020",
-          preco: "500",
-          emprestado: true,
-          quantidade: 2
-        }
-      ]
-    };
+    return {};
   },
   methods: {}
 };

@@ -1,6 +1,7 @@
 <template>
-    <div id="app">
-        <notifications></notifications>
-        <router-view/>
-    </div>
+  <div id="app">
+    <spiner-loading></spiner-loading>
+    <notifications></notifications>
+    <router-view/>
+  </div>
 </template>

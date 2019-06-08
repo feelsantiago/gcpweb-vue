@@ -1,4 +1,5 @@
 import axios from 'axios';
+import AuthService from './AuthService';
 
 const baseUrl = 'https://gcpweb-application.herokuapp.com/api/';
 
@@ -29,7 +30,7 @@ function transformArrayToEndpoint (params) {
 
 function serializeQueryParam (query) {
 	const keys = Object.keys(query);
-	const result = '?';
+	let result = '?';
 
 	for (let key of keys) {
 		result += key + '=' + query[key] + '&';
@@ -40,23 +41,31 @@ function serializeQueryParam (query) {
 	return result;
 }
 
+function getHeaders () {
+	return {
+		'Access-Control-Allow-Origin'  : '*',
+		'Access-Control-Allow-Headers' : 'Authorization',
+		'Access-Control-Allow-Methods' : 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+		Authorization                  : AuthService.getToken()
+	};
+}
 class RequestService {
 	constructor () {}
 
 	get (endpoint, params, query) {
-		return axios.get(getFullUrl(endpoint, params, query));
+		return axios.get(getFullUrl(endpoint, params, query), { headers: getHeaders() });
 	}
 
 	post (endpoint, body) {
-		return axios.post(getFullUrl(endpoint), body);
+		return axios.post(getFullUrl(endpoint), body, { headers: getHeaders() });
 	}
 
 	put (endpoint, body, params) {
-		return axios.put(getFullUrl(endpoint, params), body);
+		return axios.put(getFullUrl(endpoint, params), body, { headers: getHeaders() });
 	}
 
 	delete (endpoint, params) {
-		return axios.delete(getFullUrl(endpoint, params));
+		return axios.delete(getFullUrl(endpoint, params), { headers: getHeaders() });
 	}
 }
 

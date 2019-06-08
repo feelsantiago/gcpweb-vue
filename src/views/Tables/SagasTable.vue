@@ -35,17 +35,15 @@
 <script>
 export default {
   name: "sagas-table",
+  props: {
+    data: {
+      type: Array,
+      default: () => [],
+      description: "Table data"
+    }
+  },
   data() {
-    return {
-      total: 0,
-      tableData: [
-        {
-          titulo: "HQ 1",
-          items: 1,
-          faltam: 2
-        }
-      ]
-    };
+    return {};
   },
   methods: {}
 };

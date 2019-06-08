@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import DashboardLayout from '@/layout/DashboardLayout';
 import AuthLayout from '@/layout/AuthLayout';
+import AuthService from './services/AuthService';
 Vue.use(Router);
 
 export default new Router({
@@ -25,10 +26,15 @@ export default new Router({
 			]
 		},
 		{
-			path      : '/dashboard',
-			redirect  : 'dashboard',
-			component : DashboardLayout,
-			children  : [
+			path        : '/dashboard',
+			redirect    : 'dashboard',
+			component   : DashboardLayout,
+			beforeEnter : (to, from, next) => {
+				console.log('LOG OUTPUT: AuthService.isAuthenticated()', AuthService.isAuthenticated());
+				if (AuthService.isAuthenticated()) next();
+				else next(false);
+			},
+			children    : [
 				{
 					path      : '/dashboard',
 					name      : 'Inicio',

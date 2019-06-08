@@ -22,5 +22,5 @@ class AmigoService {
 	}
 }
 
-const singletonInstance = new SagaService();
+const singletonInstance = new AmigoService();
 export default singletonInstance;

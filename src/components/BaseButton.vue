@@ -103,7 +103,7 @@ export default {
   },
   methods: {
     handleClick(evt) {
-      this.$emit("click", evt);
+      if (!this.disable) this.$emit("click", evt);
     }
   }
 };

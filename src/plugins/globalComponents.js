@@ -14,6 +14,7 @@ import BaseSwitch from '../components/BaseSwitch';
 import BaseTable from '../components/BaseTable';
 import BaseHeader from '../components/BaseHeader';
 import Card from '../components/Card';
+import SpinerLoading from '../components/SpinerLoading';
 import StatsCard from '../components/StatsCard';
 import Modal from '../components/Modal';
 import TabPane from '../components/Tabs/TabPane';
@@ -37,6 +38,7 @@ export default {
 		Vue.component(BaseTable.name, BaseTable);
 		Vue.component(BaseHeader.name, BaseHeader);
 		Vue.component(Card.name, Card);
+		Vue.component(SpinerLoading.name, SpinerLoading);
 		Vue.component(StatsCard.name, StatsCard);
 		Vue.component(Modal.name, Modal);
 		Vue.component(TabPane.name, TabPane);

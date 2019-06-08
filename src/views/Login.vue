@@ -15,6 +15,8 @@
               placeholder="Nome do Usuario"
               addon-left-icon="ni ni-email-83"
               v-model="model.username"
+              :required="true"
+              :valid="validUserName"
             ></base-input>
 
             <base-input
@@ -23,13 +25,20 @@
               type="password"
               addon-left-icon="ni ni-lock-circle-open"
               v-model="model.password"
+              :required="true"
+              :valid="validPassword"
             ></base-input>
 
-            <base-checkbox class="custom-control-alternative">
+            <base-checkbox class="custom-control-alternative" v-model="lembrar">
               <span class="text-muted">Lembrar-me</span>
             </base-checkbox>
             <div class="text-center">
-              <base-button type="primary" class="my-4" @click="login">Entrar</base-button>
+              <base-button
+                :disable="disabledSubmit"
+                type="primary"
+                class="my-4"
+                @click="login"
+              >{{ isLoading ? '...' : 'Entrar' }}</base-button>
             </div>
           </form>
         </div>
@@ -51,11 +60,20 @@
 </template>
 <script>
 import LoginService from "../services/LoginService";
+import LoaderService from "../services/LoaderService";
+import AuthService from "../services/AuthService";
 
 export default {
   name: "login",
   data() {
     return {
+      isLoading: false,
+      lembrar: false,
+      valid: {
+        username: false,
+        password: false
+      },
+      disabledSubmit: true,
       model: {
         username: "",
         password: ""
@@ -65,13 +83,45 @@ export default {
   methods: {
     async login() {
       try {
+        this.isLoading = true;
+        this.disabledSubmit = true;
+        LoaderService.loading();
+
         const result = await LoginService.login(this.model);
-        console.log(result);
+        AuthService.setUserAuthentication(
+          this.model,
+          result.data,
+          this.lembrar
+        );
+        this.$router.push({ path: "dashboard" });
       } catch (error) {
         console.log(error);
+      } finally {
+        this.isLoading = false;
+        this.disabledSubmit = false;
+        LoaderService.clear();
       }
+    },
+    submitValidation() {
+      if (this.valid.username && this.valid.password)
+        this.disabledSubmit = false;
+      else this.disabledSubmit = true;
+    }
+  },
+  computed: {
+    validUserName() {
+      this.valid.username =
+        this.model.username !== "" && this.model.username !== " ";
 
-      // this.$router.push({ path: "dashboard" });
+      this.submitValidation();
+      return this.valid.username;
+    },
+    validPassword() {
+      this.valid.password =
+        this.model.password !== "" && this.model.password !== " ";
+
+      this.submitValidation();
+      return this.valid.password;
     }
   }
 };
