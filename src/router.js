@@ -68,7 +68,7 @@ export default new Router({
 					component : () => import(/* webpackChunkName: "demo" */ './views/Forms/AmigoForm.vue')
 				},
 				{
-					path      : '/sagas/create',
+					path      : '/sagas/create/:id?',
 					name      : 'Criar Sagas',
 					component : () => import(/* webpackChunkName: "demo" */ './views/Forms/SagaForm.vue')
 				},

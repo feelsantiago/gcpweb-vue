@@ -165,6 +165,7 @@ export default {
         importancia: false
       },
       item: {
+        id: 0,
         titulo: "",
         estado: "Novo",
         preco: 0,

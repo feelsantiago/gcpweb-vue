@@ -63,11 +63,20 @@ import ItemService from "../../services/ItemService";
 
 export default {
   name: "sagas-form",
+  created() {
+    if (this.$route.params.id) this.saga.id = this.$route.params.id;
+  },
   async mounted() {
     try {
       LoaderService.loading();
       const result = await ItemService.getAll();
       this.jogos = result.data.content;
+
+      if (this.saga.id === 0) return;
+
+      const saga_result = await SagaService.getById(this.saga.id);
+      this.saga = saga_result.data;
+      this.selecteds = this.saga.items;
     } catch (error) {
       console.log(error);
     } finally {
@@ -103,7 +112,10 @@ export default {
         const ids = this.selectedsChanges.map(selected => selected.id);
         const payload = Object.assign({}, this.saga, { items: ids });
         console.log(payload);
-        await SagaService.save(payload);
+        this.saga.id === 0
+          ? await SagaService.save(payload)
+          : await SagaService.update(payload);
+
         this.$router.push({ path: "/sagas" });
       } catch (error) {
         console.log(error);

@@ -56,7 +56,12 @@ export default {
           this.result = [];
         } else {
           const index = this.result.findIndex(e => e.id === value.id);
-          this.result = this.result.splice(index - 1, 1);
+          const result = [];
+          for (let i = 0; i < this.result.length; i++) {
+            if (index === i) continue;
+            result.push(this.result[i]);
+          }
+          this.result = result;
         }
       }
 
@@ -64,10 +69,14 @@ export default {
     }
   },
   updated() {
+    this.binds = [];
     for (let element of this.data) {
       let finded = false;
       for (let a of this.selecteds) {
-        if (a.id === element.id) finded = true;
+        if (a.id === element.id) {
+          finded = true;
+          break;
+        }
       }
 
       if (finded) {
