@@ -11,6 +11,7 @@
       <div class="card-body">
         <item-form
           :validSlot="valid"
+          :initialItem="editableItem"
           @onFormValidation="handleOnFormValidation"
           @onValueChange="handleValueChange"
         >
@@ -37,6 +38,7 @@
                     class="form-control"
                     v-model="dlc.jogo"
                     :class="[ valid.jogo ? 'is-valid' : 'is-invalid' ]"
+                    v-if="loadSelect"
                   >
                     <option
                       v-for="(jogo, index) in jogos"
@@ -74,20 +76,37 @@ import ItemService from "../../services/ItemService";
 export default {
   name: "dlc-form",
   components: { ItemForm },
+  created() {
+    if (this.$route.params.id) this.item.id = this.$route.params.id;
+  },
   async mounted() {
     try {
       LoaderService.loading();
+
       const result = await ItemService.getAll({ tipo: "jogodigital" });
       this.jogos = result.data.content;
+
+      if (this.item.id !== 0) {
+        const item_result = await ItemService.getById(this.item.id);
+        const dlc_result = await DlcService.getById(item_result.data.itemId);
+
+        dlc_result.data.jogo = dlc_result.data.jogo.id;
+        this.dlc = dlc_result.data;
+
+        this.editableItem = item_result.data;
+        this.item = this.editableItem;
+      }
     } catch (error) {
       console.log(error);
     } finally {
       LoaderService.clear();
+      this.loadSelect = true;
     }
   },
   data() {
     return {
       disabledSubmit: true,
+      loadSelect: false,
       valid: {
         localizacao: false,
         jogo: false
@@ -96,7 +115,10 @@ export default {
         localizacao: "",
         jogo: 0
       },
-      item: {},
+      item: {
+        id: 0
+      },
+      editableItem: {},
       jogos: []
     };
   },
@@ -111,9 +133,13 @@ export default {
     async submitForm() {
       try {
         LoaderService.loading();
-        const payload = Object.assign({}, this.item, this.dlc);
-        await DlcService.save(payload);
-        this.$router.push({ path: "/item" });
+        const payload = Object.assign({}, this.dlc, this.item);
+
+        this.item.id === 0
+          ? await DlcService.save(payload)
+          : await DlcService.update(payload);
+
+        this.$router.push({ path: "/items" });
       } catch (error) {
         console.log(error);
       } finally {

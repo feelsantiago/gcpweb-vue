@@ -30,7 +30,6 @@ export default new Router({
 			redirect    : 'dashboard',
 			component   : DashboardLayout,
 			beforeEnter : (to, from, next) => {
-				console.log('LOG OUTPUT: AuthService.isAuthenticated()', AuthService.isAuthenticated());
 				if (AuthService.isAuthenticated()) next();
 				else next(false);
 			},
