@@ -20,6 +20,10 @@ class HqService {
 	delete (id) {
 		return RequestService.delete(endpoint, id);
 	}
+
+	update (id) {
+		return RequestService.put(endpoint, id);
+	}
 }
 
 const singletonInstance = new HqService();

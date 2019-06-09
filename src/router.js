@@ -74,27 +74,27 @@ export default new Router({
 					component : () => import(/* webpackChunkName: "demo" */ './views/Forms/SagaForm.vue')
 				},
 				{
-					path      : '/items/hq/create',
+					path      : '/items/hq/create/:id?',
 					name      : 'Criar HQ',
 					component : () => import(/* webpackChunkName: "demo" */ './views/Forms/HqForm.vue')
 				},
 				{
-					path      : '/items/dlc/create',
+					path      : '/items/dlc/create/:id?',
 					name      : 'Criar DLC',
 					component : () => import(/* webpackChunkName: "demo" */ './views/Forms/DlcForm.vue')
 				},
 				{
-					path      : '/items/dvdcd/create',
+					path      : '/items/dvdcd/create/:id?',
 					name      : 'Criar DVD/CD',
 					component : () => import(/* webpackChunkName: "demo" */ './views/Forms/DvdCdForm.vue')
 				},
 				{
-					path      : '/items/jogotabuleiro/create',
+					path      : '/items/jogotabuleiro/create/:id?',
 					name      : 'Criar JOGO TABULEIRO',
 					component : () => import(/* webpackChunkName: "demo" */ './views/Forms/JogoTabuleiroForm.vue')
 				},
 				{
-					path      : '/items/jogodigital/create',
+					path      : '/items/jogodigital/create/:id?',
 					name      : 'Criar JOGO DIGITAL',
 					component : () => import(/* webpackChunkName: "demo" */ './views/Forms/JogoDigital.vue')
 				},
