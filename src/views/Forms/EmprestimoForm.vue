@@ -75,7 +75,7 @@
           <hr class="my-4">
           <div class="row align-right">
             <div class="col-md-12">
-              <base-button type="success" :disable="!valid.submit">Salvar</base-button>
+              <base-button type="success" :disable="!valid.submit" @click="submitForm">Salvar</base-button>
             </div>
           </div>
         </form>
@@ -91,6 +91,7 @@ import "flatpickr/dist/flatpickr.css";
 import LoaderService from "../../services/LoaderService";
 import AmigoService from "../../services/AmigoService";
 import ItemService from "../../services/ItemService";
+import EmprestimoService from "../../services/EmprestimoService";
 
 export default {
   name: "emprestimo-form",
@@ -134,6 +135,22 @@ export default {
     submitValidation() {
       if (this.valid.amigo && this.valid.devolucao) this.valid.submit = true;
       else this.valid.submit = false;
+    },
+    async submitForm() {
+      try {
+        LoaderService.loading();
+        const payload = {
+          item: this.item.id,
+          amigo: this.emprestimo.amigo,
+          devolucao: this.emprestimo.devolucao
+        };
+        await EmprestimoService.save(payload);
+        this.$router.push({ path: "/items" });
+      } catch (error) {
+        console.log(error);
+      } finally {
+        LoaderService.clear();
+      }
     }
   },
   watch: {

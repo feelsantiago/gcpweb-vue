@@ -1,6 +1,5 @@
 import axios from 'axios';
 import AuthService from './AuthService';
-import { isBoolean } from 'util';
 
 const baseUrl = 'https://gcpweb-application.herokuapp.com/api/';
 
@@ -20,7 +19,7 @@ function getFullUrl (endpoint, params, query) {
 }
 
 function transformArrayToEndpoint (params) {
-	let result;
+	let result = '';
 
 	for (let param of params) {
 		if (param !== '' && param !== ' ') result += '/' + param;

@@ -24,7 +24,7 @@
           <th></th>
         </template>
 
-        <template slot-scope="{row}">
+        <template slot-scope="{row, index}">
           <th scope="row">{{row.titulo}}</th>
           <td>{{row.tipo}}</td>
           <td>{{row.estado}}</td>
@@ -33,8 +33,11 @@
           <td>{{ row.quantidade }}</td>
           <td>
             <base-button type="primary" size="sm">Editar</base-button>
-            <base-button v-if="!row.emprestado" type="secondary" size="sm">Emprestar</base-button>
-            <base-button v-else type="success" size="sm">Devolver</base-button>
+            <base-button
+              :type="row.emprestado ? 'success' : 'secondary'"
+              size="sm"
+              @click="handleEmprestar(row.emprestado, row.id, index)"
+            >{{ row.emprestado ? 'Devolver' : 'Emprestar' }}</base-button>
           </td>
         </template>
       </base-table>
@@ -42,6 +45,9 @@
   </div>
 </template>
 <script>
+import LoaderService from "../../services/LoaderService";
+import EmprestimoService from "../../services/EmprestimoService";
+
 export default {
   name: "items-table",
   props: {
@@ -54,7 +60,21 @@ export default {
   data() {
     return {};
   },
-  methods: {}
+  methods: {
+    async handleEmprestar(emprestado, id, index) {
+      if (!emprestado) return this.$router.push("/items/emprestimo/" + id);
+
+      try {
+        LoaderService.loading();
+        await EmprestimoService.devolver(id);
+        this.data[index].emprestado = false;
+      } catch (error) {
+        console.log(error);
+      } finally {
+        LoaderService.clear();
+      }
+    }
+  }
 };
 </script>
 <style>
