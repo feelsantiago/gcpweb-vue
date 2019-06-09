@@ -7,7 +7,7 @@
             <div class="btn-wrapper text-center">
               <img src="img/brand/gcp-logo.jpg" width="100px" height="100px">
             </div>
-            <small>Entrar</small>
+            <small>{{ title }}</small>
           </div>
           <form role="form">
             <base-input
@@ -35,7 +35,7 @@
                 type="primary"
                 class="my-4"
                 @click="login"
-              >{{ isLoading ? '...' : 'Entrar' }}</base-button>
+              >{{ isLogin ? 'Entrar' : 'Registrar' }}</base-button>
             </div>
           </form>
         </div>
@@ -47,9 +47,9 @@
           </a>
         </div>
         <div class="col-6 text-right">
-          <router-link to="/register" class="text-light">
-            <small>Criar uma nova conta</small>
-          </router-link>
+          <a @click="handleCriarConta" class="text-light pointer">
+            <small>{{ isLogin ? 'Criar Usuario' : 'Login' }}</small>
+          </a>
         </div>
       </div>
     </div>
@@ -57,6 +57,7 @@
 </template>
 <script>
 import LoginService from "../services/LoginService";
+import UserService from "../services/UserService";
 import LoaderService from "../services/LoaderService";
 import AuthService from "../services/AuthService";
 
@@ -64,7 +65,7 @@ export default {
   name: "login",
   data() {
     return {
-      isLoading: false,
+      isLogin: true,
       valid: {
         username: false,
         password: false
@@ -79,20 +80,20 @@ export default {
   methods: {
     async login() {
       try {
-        this.isLoading = true;
         this.disabledSubmit = true;
         LoaderService.loading();
 
-        const result = await LoginService.login(this.model);
-        AuthService.setUserAuthentication(
-          this.model,
-          result.data
-        );
-        this.$router.push({ path: "dashboard" });
+        if (this.isLogin) {
+          const result = await LoginService.login(this.model);
+          AuthService.setUserAuthentication(this.model, result.data);
+          this.$router.push({ path: "dashboard" });
+        } else {
+          const result = await UserService.save(this.model);
+          this.isLogin = true;
+        }
       } catch (error) {
         console.log(error);
       } finally {
-        this.isLoading = false;
         this.disabledSubmit = false;
         LoaderService.clear();
       }
@@ -101,6 +102,9 @@ export default {
       if (this.valid.username && this.valid.password)
         this.disabledSubmit = false;
       else this.disabledSubmit = true;
+    },
+    handleCriarConta() {
+      this.isLogin = !this.isLogin;
     }
   },
   computed: {
@@ -117,9 +121,16 @@ export default {
 
       this.submitValidation();
       return this.valid.password;
+    },
+    title() {
+      if (this.isLogin) return "Entrar";
+      else return "Registrar";
     }
   }
 };
 </script>
 <style>
+.pointer {
+  cursor: pointer;
+}
 </style>
