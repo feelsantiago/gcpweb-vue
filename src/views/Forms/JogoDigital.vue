@@ -11,6 +11,7 @@
       <div class="card-body">
         <item-form
           :validSlot="valid"
+          :initialItem="editableItem"
           @onFormValidation="handleOnFormValidation"
           @onValueChange="handleValueChange"
         >
@@ -52,10 +53,33 @@
 import ItemForm from "./ItemForm";
 import LoaderService from "../../services/LoaderService";
 import JogoDigitalService from "../../services/JogoDigitalService";
+import ItemService from "../../services/ItemService";
 
 export default {
   name: "jogodigital-form",
   components: { ItemForm },
+  created() {
+    if (this.$route.params.id) this.item.id = this.$route.params.id;
+  },
+  async mounted() {
+    if (this.item.id === 0) return;
+
+    try {
+      LoaderService.loading();
+      const item_result = await ItemService.getById(this.item.id);
+      const jogodigital_result = await JogoDigitalService.getById(
+        item_result.data.itemId
+      );
+
+      this.jogodigital = jogodigital_result.data;
+      this.editableItem = item_result.data;
+      this.item = this.editableItem;
+    } catch (error) {
+      console.log(error);
+    } finally {
+      LoaderService.clear();
+    }
+  },
   data() {
     return {
       disabledSubmit: true,
@@ -66,7 +90,10 @@ export default {
         console: "",
         finalizado: false
       },
-      item: {}
+      item: {
+        id: 0
+      },
+      editableItem: {}
     };
   },
   methods: {
@@ -76,13 +103,16 @@ export default {
     },
     handleValueChange(value) {
       this.item = value;
-      console.log(this.item);
     },
     async submitForm() {
       try {
         LoaderService.loading();
-        const payload = Object.assign({}, this.item, this.jogodigital);
-        await JogoDigitalService.save(payload);
+        const payload = Object.assign({}, this.jogodigital, this.item);
+
+        this.item.id === 0
+          ? await JogoDigitalService.save(payload)
+          : await JogoDigitalService.update(payload);
+
         this.$router.push({ path: "/items" });
       } catch (error) {
         console.log(error);
