@@ -29,9 +29,6 @@
               :valid="validPassword"
             ></base-input>
 
-            <base-checkbox class="custom-control-alternative" v-model="lembrar">
-              <span class="text-muted">Lembrar-me</span>
-            </base-checkbox>
             <div class="text-center">
               <base-button
                 :disable="disabledSubmit"
@@ -68,7 +65,6 @@ export default {
   data() {
     return {
       isLoading: false,
-      lembrar: false,
       valid: {
         username: false,
         password: false
@@ -90,8 +86,7 @@ export default {
         const result = await LoginService.login(this.model);
         AuthService.setUserAuthentication(
           this.model,
-          result.data,
-          this.lembrar
+          result.data
         );
         this.$router.push({ path: "dashboard" });
       } catch (error) {

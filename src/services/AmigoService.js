@@ -9,8 +9,8 @@ class AmigoService {
 		return RequestService.get(endpoint);
 	}
 
-	save (hq) {
-		return RequestService.post(endpoint, hq);
+	save (body) {
+		return RequestService.post(endpoint, body);
 	}
 
 	getById (id) {

@@ -9,8 +9,8 @@ class JogoDigitalService {
 		return RequestService.get(endpoint);
 	}
 
-	save (hq) {
-		return RequestService.post(endpoint, hq);
+	save (body) {
+		return RequestService.post(endpoint, body);
 	}
 
 	getById (id) {
@@ -21,8 +21,8 @@ class JogoDigitalService {
 		return RequestService.delete(endpoint, id);
 	}
 
-	update (id) {
-		return RequestService.put(endpoint, id);
+	update (body) {
+		return RequestService.put(endpoint, body);
 	}
 }
 

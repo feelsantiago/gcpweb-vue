@@ -13,10 +13,8 @@ class AuthService {
 		token = token;
 		remember = save;
 
-		if (remember) {
-			localStorage.setItem(token_key, token);
-			localStorage.setItem(user_key, user);
-		}
+		localStorage.setItem(token_key, token);
+		localStorage.setItem(user_key, user);
 
 		authenticated = true;
 	}

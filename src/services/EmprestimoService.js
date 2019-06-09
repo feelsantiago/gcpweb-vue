@@ -9,8 +9,8 @@ class EmprestimoService {
 		return RequestService.get(endpoint);
 	}
 
-	save (hq) {
-		return RequestService.post(endpoint, hq);
+	save (body) {
+		return RequestService.post(endpoint, body);
 	}
 
 	getById (id) {
@@ -21,8 +21,8 @@ class EmprestimoService {
 		return RequestService.get(endpoint, 'abertos');
 	}
 
-	devolver (id) {
-		return RequestService.get(endpoint, [ 'devolver', id ]);
+	devolver (body) {
+		return RequestService.get(endpoint, [ 'devolver', body ]);
 	}
 }
 
