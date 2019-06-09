@@ -111,7 +111,7 @@ export default {
         LoaderService.loading();
         const ids = this.selectedsChanges.map(selected => selected.id);
         const payload = Object.assign({}, this.saga, { items: ids });
-        console.log(payload);
+
         this.saga.id === 0
           ? await SagaService.save(payload)
           : await SagaService.update(payload);
