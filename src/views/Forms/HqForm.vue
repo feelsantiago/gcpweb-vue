@@ -120,6 +120,7 @@ export default {
       try {
         LoaderService.loading();
         const payload = Object.assign({}, this.hq, this.item);
+        payload.saga = this.hq.saga; // fix null saga property
 
         this.item.id === 0
           ? await HqService.save(payload)
