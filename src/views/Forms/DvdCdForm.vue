@@ -11,6 +11,7 @@
       <div class="card-body">
         <item-form
           :validSlot="valid"
+          :initialItem="editableItem"
           @onFormValidation="handleOnFormValidation"
           @onValueChange="handleValueChange"
         >
@@ -19,7 +20,7 @@
             <div class="row">
               <div class="col-lg-4">
                 <div class="form-group">
-                  <base-input label="Marca" placeholder="Marca"></base-input>
+                  <base-input label="Marca" placeholder="Marca" v-model="dvdcd.marca"></base-input>
                 </div>
               </div>
               <div class="col-lg-4">
@@ -57,10 +58,31 @@
 import ItemForm from "./ItemForm";
 import LoaderService from "../../services/LoaderService";
 import DvdCdService from "../../services/DvdCdService";
+import ItemService from "../../services/ItemService";
 
 export default {
   name: "dvdcd-form",
   components: { ItemForm },
+  created() {
+    if (this.$route.params.id) this.item.id = this.$route.params.id;
+  },
+  async mounted() {
+    if (this.item.id === 0) return;
+
+    try {
+      LoaderService.loading();
+      const item_result = await ItemService.getById(this.item.id);
+      const dvdcd_result = await DvdCdService.getById(item_result.data.itemId);
+
+      this.dvdcd = dvdcd_result.data;
+      this.editableItem = item_result.data;
+      this.item = this.editableItem;
+    } catch (error) {
+      console.log(error);
+    } finally {
+      LoaderService.clear();
+    }
+  },
   data() {
     return {
       disabledSubmit: true,
@@ -72,7 +94,10 @@ export default {
         conteudo: "",
         assistido: false
       },
-      item: {}
+      item: {
+        id: 0
+      },
+      editableItem: {}
     };
   },
   methods: {
@@ -82,18 +107,21 @@ export default {
     },
     handleValueChange(value) {
       this.item = value;
-      console.log(this.item);
     },
     async submitForm() {
       try {
         LoaderService.loading();
-        const payload = Object.assign({}, this.item, this.dvdcd);
-        await DvdCdService.save(payload);
+        const payload = Object.assign({}, this.dvdcd, this.item);
+
+        this.item.id === 0
+          ? await DvdCdService.save(payload)
+          : await DvdCdService.update(payload);
+
+        this.$router.push({ path: "/items" });
       } catch (error) {
         console.log(error);
       } finally {
         LoaderService.clear();
-        this.$router.push({ path: "/items" });
       }
     }
   },

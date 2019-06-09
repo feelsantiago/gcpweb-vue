@@ -1,9 +1,5 @@
 <template>
   <form>
-    <!-- id -->
-    <input type="text" id="input-id" hidden>
-    <input type="text" id="input-itemId" hidden>
-
     <!-- Item -->
     <h6 class="heading-small text-muted mb-4">Informações do Item</h6>
     <div class="pl-lg-4">
