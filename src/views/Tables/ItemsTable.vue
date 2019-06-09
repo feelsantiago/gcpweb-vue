@@ -32,7 +32,7 @@
           <td>{{ row.emprestado }}</td>
           <td>{{ row.quantidade }}</td>
           <td>
-            <base-button type="primary" size="sm">Editar</base-button>
+            <base-button type="primary" size="sm" @click="handleEditar(row.id, row.tipo)">Editar</base-button>
             <base-button
               :type="row.emprestado ? 'success' : 'secondary'"
               size="sm"
@@ -73,6 +73,9 @@ export default {
       } finally {
         LoaderService.clear();
       }
+    },
+    handleEditar(id, tipo) {
+      this.$router.push({ path: `/items/${tipo}/create/${id}` });
     }
   }
 };

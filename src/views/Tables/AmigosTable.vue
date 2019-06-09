@@ -27,7 +27,7 @@
           <td>{{row.telefone}}</td>
           <td>{{ row.endereco }}</td>
           <td>
-            <base-button type="primary" size="sm">Editar</base-button>
+            <base-button type="primary" size="sm" @click="handleEditar(row.id)">Editar</base-button>
             <base-button type="danger" size="sm">Excluir</base-button>
           </td>
         </template>
@@ -48,7 +48,11 @@ export default {
   data() {
     return {};
   },
-  methods: {}
+  methods: {
+    handleEditar(id) {
+      this.$router.push({ path: `/amigos/create/${id}` });
+    }
+  }
 };
 </script>
 <style>

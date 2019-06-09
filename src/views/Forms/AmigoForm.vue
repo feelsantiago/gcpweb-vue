@@ -91,6 +91,22 @@ import AmigoService from "../../services/AmigoService";
 
 export default {
   name: "amigos-form",
+  created() {
+    if (this.$route.params.id) this.amigo.id = this.$route.params.id;
+  },
+  async mounted() {
+    if (this.amigo.id === 0) return;
+
+    try {
+      LoaderService.loading();
+      const resutl = await AmigoService.getById(this.amigo.id);
+      this.amigo = resutl.data;
+    } catch (error) {
+      console.log(error);
+    } finally {
+      LoaderService.clear();
+    }
+  },
   data() {
     return {
       amigo: {
@@ -116,7 +132,11 @@ export default {
       try {
         LoaderService.loading();
         const payload = Object.assign({}, this.amigo);
-        await AmigoService.save(payload);
+
+        this.amigo.id === 0
+          ? await AmigoService.save(payload)
+          : await AmigoService.update(payload);
+
         this.$router.push({ path: "/amigos" });
       } catch (error) {
         console.log(error);

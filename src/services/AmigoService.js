@@ -20,6 +20,10 @@ class AmigoService {
 	delete (id) {
 		return RequestService.delete(endpoint, id);
 	}
+
+	update (body) {
+		return RequestService.put(endpoint, body);
+	}
 }
 
 const singletonInstance = new AmigoService();

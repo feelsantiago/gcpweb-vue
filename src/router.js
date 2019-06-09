@@ -64,7 +64,7 @@ export default new Router({
 					component : () => import(/* webpackChunkName: "demo" */ './views/Amigos.vue')
 				},
 				{
-					path      : '/amigos/create',
+					path      : '/amigos/create/:id?',
 					name      : 'Criar Amigos',
 					component : () => import(/* webpackChunkName: "demo" */ './views/Forms/AmigoForm.vue')
 				},
