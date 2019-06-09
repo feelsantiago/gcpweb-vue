@@ -36,19 +36,15 @@
 </template>
 <script>
 import ItemService from "../../services/ItemService";
-import LoaderService from "../../services/LoaderService";
 
 export default {
   name: "wish-list-table",
   async mounted() {
     try {
-      LoaderService.loading();
       const result = await ItemService.getWishList();
       this.items = result.data.content;
     } catch (error) {
       console.log(error);
-    } finally {
-      LoaderService.clear();
     }
   },
   data() {
