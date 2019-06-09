@@ -97,6 +97,11 @@ export default new Router({
 					path      : '/items/jogodigital/create',
 					name      : 'Criar JOGO DIGITAL',
 					component : () => import(/* webpackChunkName: "demo" */ './views/Forms/JogoDigital.vue')
+				},
+				{
+					path      : '/items/emprestimo/:id',
+					name      : 'Emprestar Item',
+					component : () => import(/* webpackChunkName: "demo" */ './views/Forms/EmprestimoForm.vue')
 				}
 			]
 		}

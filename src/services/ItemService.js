@@ -9,6 +9,10 @@ class ItemService {
 		return RequestService.get(endpoint, undefined, query);
 	}
 
+	getById (id) {
+		return RequestService.get(endpoint, id);
+	}
+
 	getWishList () {
 		return RequestService.get(endpoint, 'wishlist');
 	}
