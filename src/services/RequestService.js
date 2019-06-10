@@ -1,10 +1,14 @@
 import axios from 'axios';
 import AuthService from './AuthService';
 
-const baseUrl = 'https://gcpweb-application.herokuapp.com/api/';
+axios.defaults.baseURL = 'http://localhost:8081/api/';
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Authorization';
+axios.defaults.headers.common['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PUT, PATCH, DELETE';
+axios.defaults.headers.common['Authorization'] = AuthService.getToken().toString();
 
 function getFullUrl (endpoint, params, query) {
-	let fullUrl = baseUrl + endpoint;
+	let fullUrl = endpoint;
 
 	if (params) {
 		if (Array.isArray(params)) fullUrl += transformArrayToEndpoint(params);
@@ -43,29 +47,30 @@ function serializeQueryParam (query) {
 
 function getHeaders () {
 	return {
-		'Access-Control-Allow-Origin'  : '*',
-		'Access-Control-Allow-Headers' : 'Authorization',
-		'Access-Control-Allow-Methods' : 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
-		Authorization                  : AuthService.getToken()
+		'Access-Control-Allow-Origin'      : '*',
+		'Access-Control-Allow-Headers'     : 'Authorization',
+		'Access-Control-Allow-Methods'     : 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+		'Access-Control-Allow-Credentials' : true,
+		Authorization                      : AuthService.getToken()
 	};
 }
 class RequestService {
 	constructor () {}
 
 	get (endpoint, params, query) {
-		return axios.get(getFullUrl(endpoint, params, query), { headers: getHeaders() });
+		return axios.get(getFullUrl(endpoint, params, query));
 	}
 
 	post (endpoint, body) {
-		return axios.post(getFullUrl(endpoint), body, { headers: getHeaders() });
+		return axios.post(getFullUrl(endpoint), body);
 	}
 
 	put (endpoint, body, params) {
-		return axios.put(getFullUrl(endpoint, params), body, { headers: getHeaders() });
+		return axios.put(getFullUrl(endpoint, params), body);
 	}
 
 	delete (endpoint, params) {
-		return axios.delete(getFullUrl(endpoint, params), { headers: getHeaders() });
+		return axios.delete(getFullUrl(endpoint, params));
 	}
 }
 
