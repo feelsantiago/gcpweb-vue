@@ -5,7 +5,7 @@ axios.defaults.baseURL = 'http://localhost:8081/api/';
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Authorization';
 axios.defaults.headers.common['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PUT, PATCH, DELETE';
-axios.defaults.headers.common['Authorization'] = AuthService.getToken().toString();
+axios.defaults.headers.common['Authorization'] = AuthService.getToken();
 
 function getFullUrl (endpoint, params, query) {
 	let fullUrl = endpoint;

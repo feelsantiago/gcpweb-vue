@@ -42,6 +42,12 @@ class AuthService {
 		if (token) return token;
 
 		token = localStorage.getItem(token_key);
+
+		try {
+			if (typeof token === 'string') token = token;
+			else token = token.toString();
+		} catch (error) {}
+
 		return token;
 	}
 
